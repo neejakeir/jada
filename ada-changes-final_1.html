@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AZTaxes.gov - WCAG 2.2 AA Navigation Changes (Final)</title>
+    <style>
+        *{box-sizing:border-box;margin:0;padding:0}
+        body{font-family:"Segoe UI",Verdana,Helvetica,sans-serif;background:#f4f4f4;color:#232323;line-height:1.6}
+        .container{max-width:1200px;margin:0 auto;padding:20px}
+        h1{color:#134475;font-size:22pt;border-bottom:3px solid #2d6ca2;padding-bottom:10px;margin-bottom:6px}
+        .subtitle{color:#666;font-size:10pt;margin-bottom:20px}
+        h2{color:#2d6ca2;font-size:14pt;margin:30px 0 6px 0}
+        p{font-size:10pt;margin-bottom:10px}
+        .badge{display:inline-block;background:#2d6ca2;color:#fff;font-size:8pt;padding:2px 6px;border-radius:3px;font-weight:bold}
+        .badge.new{background:#d9534f}
+        .badge.level{background:#5cb85c}
+        hr{border:none;border-top:1px solid #ccc;margin:30px 0}
+        .compare{display:flex;gap:0;margin:10px 0 20px 0;border-radius:4px;overflow:hidden;border:1px solid #555}
+        .compare .side{flex:1;min-width:0}
+        .compare .label-bar{padding:6px 12px;font-size:9pt;font-weight:bold;text-transform:uppercase;letter-spacing:.5px}
+        .compare .side.before .label-bar{background:#5c2020;color:#f48771}
+        .compare .side.after .label-bar{background:#1f3c1f;color:#89d185}
+        .compare pre{margin:0;padding:12px;font-size:8.5pt;line-height:1.55;white-space:pre-wrap;word-wrap:break-word;font-family:Consolas,"Courier New",monospace;min-height:100%}
+        .compare .side.before pre{background:#2d1515;color:#e8b4b4;border-right:1px solid #555}
+        .compare .side.after pre{background:#152d15;color:#b4e8b4}
+        .addition{margin:10px 0 20px 0;border-radius:4px;overflow:hidden;border:1px solid #555}
+        .addition .label-bar{background:#1f3c1f;color:#89d185;padding:6px 12px;font-size:9pt;font-weight:bold;text-transform:uppercase;letter-spacing:.5px}
+        .addition pre{background:#152d15;color:#b4e8b4;margin:0;padding:12px;font-size:8.5pt;line-height:1.55;white-space:pre-wrap;word-wrap:break-word;font-family:Consolas,"Courier New",monospace}
+        .hl{color:#fff;font-weight:bold}
+        .cm{color:#6a9955}
+        table{width:100%;border-collapse:collapse;margin:10px 0 20px 0;font-size:10pt}
+        th{background:#2d6ca2;color:#fff;padding:8px 12px;text-align:left}
+        td{padding:8px 12px;border-bottom:1px solid #ddd}
+        tr:nth-child(even){background:#f0f5fa}
+        @media(max-width:768px){.compare{flex-direction:column}}
+    </style>
+</head>
+<body>
+<div class="container">
+
+<h1>AZTaxes.gov &mdash; WCAG 2.2 AA Navigation Changes</h1>
+<p class="subtitle">Final documentation &bull; Side-by-side comparison &bull; April 2026</p>
+
+<hr>
+
+<!-- ============================================================ -->
+<h2>1. HTML Language Attribute</h2>
+<p><span class="badge">3.1.1</span> <span class="badge level">A</span> Language of Page</p>
+<div class="compare">
+    <div class="side before"><div class="label-bar">&#x2717; Original</div>
+<pre>&lt;html class="js flexbox flexboxlegacy ..."&gt;</pre>
+    </div>
+    <div class="side after"><div class="label-bar">&#x2713; Fixed</div>
+<pre>&lt;html <span class="hl">lang="en"</span>&gt;</pre>
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<h2>2. Page Title</h2>
+<p><span class="badge">2.4.2</span> <span class="badge level">A</span> Page Titled</p>
+<div class="compare">
+    <div class="side before"><div class="label-bar">&#x2717; Original</div>
+<pre>&lt;title&gt;&lt;/title&gt;</pre>
+    </div>
+    <div class="side after"><div class="label-bar">&#x2713; Fixed</div>
+<pre>&lt;title&gt;<span class="hl">AZTaxes - Arizona Department of Revenue</span>&lt;/title&gt;</pre>
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<h2>3. Skip Navigation Link</h2>
+<p><span class="badge">2.4.1</span> <span class="badge level">A</span> Bypass Blocks</p>
+<div class="compare">
+    <div class="side before"><div class="label-bar">&#x2717; Original</div>
+<pre>&lt;body style="background:#f4f4f4;"&gt;
+  &lt;div id="aztwrapper"&gt;
+    <span class="cm">&lt;!-- No skip link --&gt;</span></pre>
+    </div>
+    <div class="side after"><div class="label-bar">&#x2713; Fixed</div>
+<pre>&lt;body&gt;
+  <span class="hl">&lt;a class="skip-link sr-only sr-only-focusable"
+     href="#main-content"&gt;
+    Skip to main content
+  &lt;/a&gt;</span>
+  &lt;div class="container-fluid"&gt;</pre>
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<h2>4. Header Landmark</h2>
+<p><span class="badge">1.3.1</span> <span class="badge level">A</span> Info and Relationships</p>
+<div class="compare">
+    <div class="side before"><div class="label-bar">&#x2717; Original</div>
+<pre>&lt;div id="HdrMain"&gt;
+  &lt;div id="headcontainer"&gt;
+    State of Arizona ...
+  &lt;/div&gt;</pre>
+    </div>
+    <div class="side after"><div class="label-bar">&#x2713; Fixed</div>
+<pre>&lt;<span class="hl">header role="banner"</span>&gt;
+  &lt;div class="top-banner"&gt;
+    State of Arizona ...
+  &lt;/div&gt;</pre>
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<h2>5. Nav Element Label</h2>
+<p><span class="badge">1.3.1</span> <span class="badge level">A</span> Info and Relationships &nbsp; <span class="badge">4.1.2</span> <span class="badge level">A</span> Name, Role, Value</p>
+<div class="compare">
+    <div class="side before"><div class="label-bar">&#x2717; Original</div>
+<pre>&lt;nav id="azthdrnav"
+     class="navbar navbar-default
+            navbar-static-top"&gt;</pre>
+    </div>
+    <div class="side after"><div class="label-bar">&#x2713; Fixed</div>
+<pre>&lt;nav class="navbar main-nav
+            navbar-static-top"
+     <span class="hl">aria-label="Main navigation"</span>&gt;</pre>
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<h2>6. Menu List &mdash; ARIA Menubar</h2>
+<p><span class="badge">4.1.2</span> <span class="badge level">A</span> Name, Role, Value</p>
+<div class="compare">
+    <div class="side before"><div class="label-bar">&#x2717; Original</div>
+<pre>&lt;ul class="nav navbar-nav navbar-right"&gt;
+  &lt;li&gt;
+    &lt;a href="..."&gt;Home&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li class="dropdown"&gt;
+    &lt;a href="..." class="dropdown-toggle"
+       role="button"&gt;
+      Individual&lt;/a&gt;
+    &lt;ul class="dropdown-menu"&gt;
+      &lt;li&gt;&lt;a href="..."&gt;...&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</pre>
+    </div>
+    <div class="side after"><div class="label-bar">&#x2713; Fixed</div>
+<pre>&lt;ul class="nav navbar-nav navbar-right"
+    <span class="hl">data-ada-menubar</span>&gt;
+  &lt;li&gt;
+    &lt;a href="..."&gt;Home&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li class="dropdown"&gt;
+    &lt;a href="..." class="dropdown-toggle"
+       <span class="hl">aria-haspopup="true"
+       aria-expanded="false"</span>&gt;
+      Individual&lt;/a&gt;
+    &lt;ul class="dropdown-menu"&gt;
+      &lt;li&gt;&lt;a href="..."&gt;...&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+<span class="cm">&lt;!-- Script auto-applies at runtime:
+  ul             → role="menubar"
+  li             → role="none"
+  li &gt; a         → role="menuitem"
+  .dropdown-menu → role="menu"
+  .dropdown-menu li → role="none"
+  .dropdown-menu a  → role="menuitem"
+  href="#" toggles  → javascript:void(0)
+--&gt;</span></pre>
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<h2>7. Dropdown Toggle href</h2>
+<p><span class="badge">2.1.1</span> <span class="badge level">A</span> Keyboard &mdash; Prevents page jump to top</p>
+<div class="compare">
+    <div class="side before"><div class="label-bar">&#x2717; Original</div>
+<pre>&lt;a href="<span style="color:#f48771">https://aztaxes.gov/Home/Page#</span>"
+   class="dropdown-toggle"
+   data-toggle="dropdown"
+   role="button"
+   aria-haspopup="true"
+   aria-expanded="false"&gt;
+  Individual &lt;span class="caret"&gt;...
+&lt;/a&gt;</pre>
+    </div>
+    <div class="side after"><div class="label-bar">&#x2713; Fixed</div>
+<pre>&lt;a href="<span class="hl">#</span>"
+   class="dropdown-toggle"
+   data-toggle="dropdown"
+   aria-haspopup="true"
+   aria-expanded="false"&gt;
+  Individual &lt;span class="caret"&gt;...
+&lt;/a&gt;
+
+<span class="cm">&lt;!-- Script converts href="#"
+     → javascript:void(0) --&gt;</span></pre>
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<h2>8. Main Content Landmark</h2>
+<p><span class="badge">1.3.1</span> <span class="badge level">A</span> Info and Relationships</p>
+<div class="compare">
+    <div class="side before"><div class="label-bar">&#x2717; Original</div>
+<pre>&lt;section class="container"&gt;
+  <span class="cm">&lt;!-- page content --&gt;</span>
+&lt;/section&gt;</pre>
+    </div>
+    <div class="side after"><div class="label-bar">&#x2713; Fixed</div>
+<pre>&lt;<span class="hl">main</span> class="container"
+      <span class="hl">id="main-content"</span>&gt;
+  <span class="cm">&lt;!-- page content --&gt;</span>
+&lt;/<span class="hl">main</span>&gt;</pre>
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<h2>9. Footer Nav &amp; Icon Links</h2>
+<p><span class="badge">2.4.4</span> <span class="badge level">A</span> Link Purpose &nbsp; <span class="badge">1.1.1</span> <span class="badge level">A</span> Non-text Content</p>
+<div class="compare">
+    <div class="side before"><div class="label-bar">&#x2717; Original</div>
+<pre>&lt;nav id="aztmainftr"
+     class="navbar navbar-default"&gt;
+  &lt;ul class="nav navbar-nav"&gt;
+    &lt;li&gt;
+      &lt;a href=".../facebook..."
+         target="_blank"&gt;
+        &lt;i class="fa fa-facebook"
+           aria-hidden="true"&gt;&lt;/i&gt;
+      &lt;/a&gt;
+    &lt;/li&gt;
+    <span class="cm">&lt;!-- same pattern for all icons --&gt;</span>
+  &lt;/ul&gt;
+&lt;/nav&gt;</pre>
+    </div>
+    <div class="side after"><div class="label-bar">&#x2713; Fixed</div>
+<pre>&lt;nav class="navbar footer-nav"
+     <span class="hl">aria-label="Footer"</span>&gt;
+  &lt;ul class="nav navbar-nav"&gt;
+    &lt;li&gt;
+      &lt;a href=".../facebook..."
+         target="_blank"
+         <span class="hl">aria-label="Facebook
+           (opens in new window)"</span>&gt;
+        &lt;i class="fa fa-facebook"
+           aria-hidden="true"&gt;&lt;/i&gt;
+      &lt;/a&gt;
+    &lt;/li&gt;
+    <span class="cm">&lt;!-- same for X, LinkedIn, YouTube --&gt;</span>
+  &lt;/ul&gt;
+&lt;/nav&gt;</pre>
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<h2>10. Consistent Help (WCAG 2.2)</h2>
+<p><span class="badge new">NEW 2.2</span> <span class="badge">3.2.6</span> <span class="badge level">A</span> Consistent Help</p>
+<div class="compare">
+    <div class="side before"><div class="label-bar">&#x2717; Original Footer</div>
+<pre>&lt;li&gt;&lt;a href=".../Privacy"&gt;Privacy&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=".../accessibility"&gt;
+  Accessibility&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span&gt;&amp;copy; 2026 ...&lt;/span&gt;&lt;/li&gt;</pre>
+    </div>
+    <div class="side after"><div class="label-bar">&#x2713; Fixed Footer</div>
+<pre><span class="hl">&lt;li&gt;&lt;a href=".../ContactUsPage"&gt;
+  Contact Us&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=".../FAQ"&gt;FAQ&lt;/a&gt;&lt;/li&gt;</span>
+&lt;li&gt;&lt;a href=".../Privacy"&gt;Privacy&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=".../accessibility"&gt;
+  Accessibility&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span&gt;&amp;copy; 2026 ...&lt;/span&gt;&lt;/li&gt;</pre>
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<h2>11. Focus Appearance &amp; Active Item Highlight (WCAG 2.2)</h2>
+<p><span class="badge new">NEW 2.2</span> <span class="badge">2.4.13</span> Focus Appearance &nbsp;
+   <span class="badge new">NEW 2.2</span> <span class="badge">2.4.11</span> <span class="badge level">AA</span> Focus Not Obscured</p>
+<div class="compare">
+    <div class="side before"><div class="label-bar">&#x2717; Original</div>
+<pre><span class="cm">/* No custom focus styles.
+   Browser defaults only — thin
+   dotted outline, nearly invisible.
+
+   No highlight on parent &lt;li&gt; when
+   arrowing between menu items.
+
+   Bootstrap .open &gt; a background
+   overrides any highlight on
+   dropdown parent items. */</span></pre>
+    </div>
+    <div class="side after"><div class="label-bar">&#x2713; Fixed</div>
+<pre><span class="cm">/* 2.4.13 Focus Appearance
+   2px solid outline meets min perimeter.
+   #2d6ca2 vs white = 4.5:1 contrast
+   #2d6ca2 vs #e5e5e5 = 3.1:1 */</span>
+<span class="hl">.main-nav a:focus,
+.main-nav .dropdown-toggle:focus {
+  outline: 2px solid #2d6ca2 !important;
+  outline-offset: 2px;
+}
+.main-nav .dropdown-menu a:focus {
+  outline: 2px solid #2d6ca2 !important;
+  outline-offset: -2px;
+  background: #e8f0fe;
+}</span>
+
+<span class="cm">/* Parent &lt;li&gt; highlight on keyboard nav
+   .ada-focused class added by JS */</span>
+<span class="hl">.main-nav .navbar-nav > li:hover,
+.main-nav .navbar-nav > li:focus-within,
+.main-nav .navbar-nav > li.ada-focused {
+  border-bottom: 2px solid #2d6ca2;
+  background: rgba(45,108,162,0.08)
+              !important;
+}</span>
+
+<span class="cm">/* Override Bootstrap .open state so
+   highlight shows on dropdown parents */</span>
+<span class="hl">.main-nav .navbar-nav > .open > a,
+.main-nav .navbar-nav > .open > a:hover,
+.main-nav .navbar-nav > .open > a:focus {
+  background: transparent !important;
+  color: #000;
+}
+.main-nav .navbar-nav > .ada-focused > a,
+.main-nav .navbar-nav > .ada-focused > a:hover,
+.main-nav .navbar-nav > .ada-focused > a:focus {
+  color: #000 !important;
+  text-decoration: underline;
+}
+.main-nav .navbar-nav > .ada-focused.open {
+  border-bottom: 2px solid #2d6ca2;
+  background: rgba(45,108,162,0.08)
+              !important;
+}</span>
+
+<span class="cm">/* 2.4.11 Focus Not Obscured */</span>
+<span class="hl">.main-nav.navbar {
+  position: relative;
+  z-index: 1000;
+}
+.main-nav .navbar-collapse {
+  overflow: visible;
+}</span>
+
+<span class="cm">/* Global focus fallback */</span>
+<span class="hl">a:focus, button:focus, [tabindex]:focus {
+  outline: 2px solid #2d6ca2;
+  outline-offset: 2px;
+}</span></pre>
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<h2>12. Target Size (WCAG 2.2)</h2>
+<p><span class="badge new">NEW 2.2</span> <span class="badge">2.5.8</span> <span class="badge level">AA</span> Target Size (Minimum) &mdash; 24&times;24px</p>
+<div class="compare">
+    <div class="side before"><div class="label-bar">&#x2717; Original</div>
+<pre><span class="cm">/* No minimum size enforced.
+   Footer icon links could be
+   as small as 10x14px. */</span></pre>
+    </div>
+    <div class="side after"><div class="label-bar">&#x2713; Fixed</div>
+<pre><span class="hl">.main-nav .navbar-nav > li > a {
+  min-height: 24px;
+  min-width: 24px;
+  display: inline-block;
+}
+.main-nav .dropdown-menu > li > a {
+  min-height: 24px;
+  display: block;
+}
+.footer-nav .navbar-nav > li > a {
+  min-height: 24px;
+  min-width: 24px;
+  display: inline-block;
+}</span></pre>
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<h2>13. Keyboard Navigation Script</h2>
+<p><span class="badge">2.1.1</span> <span class="badge level">A</span> Keyboard &nbsp;
+   <span class="badge">2.1.2</span> <span class="badge level">A</span> No Keyboard Trap &nbsp;
+   <span class="badge">4.1.2</span> <span class="badge level">A</span> Name, Role, Value</p>
+<div class="compare">
+    <div class="side before"><div class="label-bar">&#x2717; Original</div>
+<pre><span class="cm">&lt;!-- No keyboard nav script.
+
+Bootstrap 3.3 built-in handler only
+partially supported Up/Down inside
+open dropdowns.
+
+Problems:
+• No Left/Right between top items
+• Enter/Space didn't open dropdowns
+• No Home/End in submenus
+• Tab trapped focus in submenus
+• No parent highlight on keyboard nav
+• Bootstrap handler conflicted with
+  any custom keyboard code --&gt;</span></pre>
+    </div>
+    <div class="side after"><div class="label-bar">&#x2713; Fixed &mdash; ada-menubar.js</div>
+<pre><span class="hl">(function ($) {
+  'use strict';
+  $(function () {
+    $('[data-ada-menubar]').each(function () {
+      var $bar  = $(this);
+      var $tops = $bar.children('li');</span>
+
+      <span class="cm">// Auto-apply ARIA roles</span>
+      <span class="hl">$bar.attr('role', 'menubar');
+      $tops.attr('role', 'none');
+      $tops.children('a')
+           .attr('role', 'menuitem');
+      $bar.find('.dropdown-menu')
+          .attr('role', 'menu');
+      $bar.find('.dropdown-menu li')
+          .attr('role', 'none');
+      $bar.find('.dropdown-menu a')
+          .attr('role', 'menuitem');</span>
+
+      <span class="cm">// Fix href="#" → javascript:void(0)</span>
+      <span class="hl">$bar.find('.dropdown-toggle[href="#"]')
+          .attr('href','javascript:void(0)');</span>
+
+      <span class="cm">// Kill Bootstrap's conflicting handler</span>
+      <span class="hl">$bar.off('keydown.bs.dropdown.data-api');
+      $bar.find('.dropdown-toggle')
+        .off('keydown.bs.dropdown.data-api');</span>
+
+      <span class="cm">// Highlight management</span>
+      <span class="hl">function highlightTop($li) {
+        $tops.removeClass('ada-focused');
+        $li.addClass('ada-focused');
+      }</span>
+
+      <span class="cm">// Focus tracking on focusin/focusout</span>
+      <span class="hl">$bar.on('focusin', function (e) {
+        var $p = $(e.target).closest($tops);
+        if ($p.length) {
+          $tops.removeClass('ada-focused');
+          $p.addClass('ada-focused');
+        }
+      });
+      $bar.on('focusout', function () {
+        setTimeout(function () {
+          if (!$bar.find(':focus').length)
+            $tops.removeClass('ada-focused');
+        }, 10);
+      });</span>
+
+      <span class="cm">// Helpers: focusTopAt, openMenu, closeMenu
+      // all call highlightTop() internally</span>
+
+      <span class="cm">// Top-level keydown:
+      //   37 Left  → focusTopAt(i - 1)
+      //   39 Right → focusTopAt(i + 1)
+      //   40 Down  → openMenu($li, false)
+      //   38 Up    → openMenu($li, true)
+      //   13/32    → openMenu($li, false)
+      //   27 Esc   → closeMenu($li)</span>
+
+      <span class="cm">// Submenu keydown:
+      //   40 Down  → next item (wraps)
+      //   38 Up    → prev item (wraps)
+      //   27 Esc   → closeMenu
+      //   39 Right → close, next top item
+      //   37 Left  → close, prev top item
+      //   36 Home  → first item
+      //   35 End   → last item
+      //   9  Tab   → close, resume tab</span>
+
+      <span class="cm">// aria-expanded sync via
+      // shown/hidden.bs.dropdown events</span>
+
+    <span class="hl">});
+    $(document)
+      .off('keydown.bs.dropdown.data-api');
+  });
+})(jQuery);</span></pre>
+    </div>
+</div>
+
+<hr>
+
+<!-- ============================================================ -->
+<h2>Keyboard Behavior Reference</h2>
+
+<h3 style="margin:15px 0 8px">Top-Level Menu Bar</h3>
+<table>
+    <tr><th style="width:130px">Key</th><th style="width:180px">Context</th><th>Result</th></tr>
+    <tr><td>Left Arrow</td><td>Any top-level item</td><td>Focus + highlight moves to previous item. Wraps first → last.</td></tr>
+    <tr><td>Right Arrow</td><td>Any top-level item</td><td>Focus + highlight moves to next item. Wraps last → first.</td></tr>
+    <tr><td>Down Arrow</td><td>Dropdown toggle</td><td>Opens submenu, highlights parent, focuses first item.</td></tr>
+    <tr><td>Up Arrow</td><td>Dropdown toggle</td><td>Opens submenu, highlights parent, focuses last item.</td></tr>
+    <tr><td>Enter / Space</td><td>Dropdown toggle</td><td>Opens submenu, highlights parent, focuses first item.</td></tr>
+    <tr><td>Enter</td><td>Regular link</td><td>Navigates to the URL.</td></tr>
+    <tr><td>Escape</td><td>Open dropdown</td><td>Closes submenu, returns focus + highlight to toggle.</td></tr>
+</table>
+
+<h3 style="margin:15px 0 8px">Inside Submenu</h3>
+<table>
+    <tr><th style="width:130px">Key</th><th style="width:180px">Context</th><th>Result</th></tr>
+    <tr><td>Down Arrow</td><td>Submenu item</td><td>Focus moves to next item. Wraps to first.</td></tr>
+    <tr><td>Up Arrow</td><td>Submenu item</td><td>Focus moves to previous item. Wraps to last.</td></tr>
+    <tr><td>Escape</td><td>Submenu item</td><td>Closes submenu, returns focus + highlight to toggle.</td></tr>
+    <tr><td>Right Arrow</td><td>Submenu item</td><td>Closes submenu, highlights + moves to next top-level item.</td></tr>
+    <tr><td>Left Arrow</td><td>Submenu item</td><td>Closes submenu, highlights + moves to previous top-level item.</td></tr>
+    <tr><td>Home</td><td>Submenu item</td><td>Focus moves to first item.</td></tr>
+    <tr><td>End</td><td>Submenu item</td><td>Focus moves to last item.</td></tr>
+    <tr><td>Tab</td><td>Submenu item</td><td>Closes submenu, resumes normal tab order.</td></tr>
+    <tr><td>Enter</td><td>Submenu item</td><td>Navigates to the URL.</td></tr>
+</table>
+
+<hr>
+
+<!-- ============================================================ -->
+<h2>WCAG 2.2 Criteria Summary</h2>
+<table>
+    <tr><th>Criterion</th><th>Level</th><th>Status</th><th>How Addressed</th></tr>
+    <tr><td>2.4.11 Focus Not Obscured</td><td>AA</td><td style="color:#d9534f;font-weight:bold">NEW in 2.2</td><td>overflow:visible on navbar, z-index:1000</td></tr>
+    <tr><td>2.4.13 Focus Appearance</td><td>AAA</td><td style="color:#d9534f;font-weight:bold">NEW in 2.2</td><td>2px solid outline with 3:1+ contrast, .ada-focused highlight on parent &lt;li&gt; including dropdowns, Bootstrap .open override</td></tr>
+    <tr><td>2.5.8 Target Size (Min)</td><td>AA</td><td style="color:#d9534f;font-weight:bold">NEW in 2.2</td><td>min-height/min-width: 24px on all nav + footer targets</td></tr>
+    <tr><td>3.2.6 Consistent Help</td><td>A</td><td style="color:#d9534f;font-weight:bold">NEW in 2.2</td><td>Contact Us + FAQ links added to footer</td></tr>
+    <tr><td>4.1.1 Parsing</td><td>&mdash;</td><td style="color:#999">Removed in 2.2</td><td>Obsolete, no longer applicable</td></tr>
+    <tr><td>2.4.1 Bypass Blocks</td><td>A</td><td>From 2.1</td><td>Skip navigation link</td></tr>
+    <tr><td>2.4.2 Page Titled</td><td>A</td><td>From 2.1</td><td>Descriptive &lt;title&gt;</td></tr>
+    <tr><td>2.4.4 Link Purpose</td><td>A</td><td>From 2.1</td><td>aria-label on icon-only links</td></tr>
+    <tr><td>2.4.7 Focus Visible</td><td>AA</td><td>From 2.1</td><td>2px solid outline on :focus + .ada-focused highlight</td></tr>
+    <tr><td>1.1.1 Non-text Content</td><td>A</td><td>From 2.1</td><td>aria-label on image/icon links</td></tr>
+    <tr><td>1.3.1 Info &amp; Relationships</td><td>A</td><td>From 2.1</td><td>Semantic landmarks (header, main, nav)</td></tr>
+    <tr><td>2.1.1 Keyboard</td><td>A</td><td>From 2.1</td><td>Full WAI-ARIA menubar keyboard navigation</td></tr>
+    <tr><td>2.1.2 No Keyboard Trap</td><td>A</td><td>From 2.1</td><td>Tab exits submenus cleanly</td></tr>
+    <tr><td>3.1.1 Language of Page</td><td>A</td><td>From 2.1</td><td>lang="en" on &lt;html&gt;</td></tr>
+    <tr><td>4.1.2 Name, Role, Value</td><td>A</td><td>From 2.1</td><td>WAI-ARIA menubar roles, aria-expanded sync</td></tr>
+</table>
+
+<hr>
+<p style="text-align:center;color:#999;font-size:9pt;">AZTaxes.gov &mdash; WCAG 2.2 AA Navigation Remediation &mdash; Final &mdash; April 2026</p>
+
+</div>
+</body>
+</html>
