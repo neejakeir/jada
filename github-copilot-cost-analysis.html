@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GitHub &amp; Copilot — Enterprise Cost Analysis 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Instrument+Serif&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0c0f14;
+  --surface: #151921;
+  --surface-2: #1c2230;
+  --border: rgba(255,255,255,0.07);
+  --border-hover: rgba(255,255,255,0.14);
+  --text: #e8eaed;
+  --text-2: #8b92a0;
+  --text-3: #5c6370;
+  --accent: #4d8ef7;
+  --accent-dim: rgba(77,142,247,0.12);
+  --green: #34d399;
+  --green-dim: rgba(52,211,153,0.12);
+  --amber: #f59e0b;
+  --amber-dim: rgba(245,158,11,0.12);
+  --red: #ef4444;
+  --red-dim: rgba(239,68,68,0.12);
+  --purple: #a78bfa;
+  --purple-dim: rgba(167,139,250,0.12);
+  --coral: #fb7185;
+  --coral-dim: rgba(251,113,133,0.12);
+  --radius: 12px;
+  --radius-sm: 8px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+.page { max-width: 1100px; margin: 0 auto; padding: 3rem 2rem 4rem; }
+
+/* Hero */
+.hero { margin-bottom: 4rem; }
+.hero h1 {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+  font-weight: 400;
+  line-height: 1.15;
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+.hero h1 em { font-style: italic; color: var(--accent); }
+.hero p { font-size: 1.05rem; color: var(--text-2); max-width: 640px; }
+
+/* Section headers */
+.section { margin-bottom: 3.5rem; }
+.section-tag {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-dim);
+  padding: 4px 12px;
+  border-radius: 100px;
+  margin-bottom: 1rem;
+}
+.section h2 {
+  font-family: 'Instrument Serif', serif;
+  font-size: 1.8rem;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.01em;
+}
+.section .sub { font-size: 0.92rem; color: var(--text-2); margin-bottom: 1.5rem; }
+
+/* Cards grid */
+.grid { display: grid; gap: 16px; }
+.g2 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.g3 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.g4 { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.card:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+.card.featured { border-color: var(--accent); box-shadow: 0 0 30px rgba(77,142,247,0.08); }
+
+.badge {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 100px;
+  margin-bottom: 12px;
+}
+.badge-blue { background: var(--accent-dim); color: var(--accent); }
+.badge-green { background: var(--green-dim); color: var(--green); }
+.badge-amber { background: var(--amber-dim); color: var(--amber); }
+.badge-red { background: var(--red-dim); color: var(--red); }
+.badge-purple { background: var(--purple-dim); color: var(--purple); }
+.badge-coral { background: var(--coral-dim); color: var(--coral); }
+
+.card-name { font-size: 1rem; font-weight: 500; margin-bottom: 4px; }
+.card-price { font-size: 1.8rem; font-weight: 700; margin-bottom: 2px; }
+.card-unit { font-size: 0.78rem; color: var(--text-3); margin-bottom: 14px; }
+.card-features { list-style: none; }
+.card-features li {
+  font-size: 0.82rem;
+  color: var(--text-2);
+  padding: 4px 0;
+  padding-left: 18px;
+  position: relative;
+}
+.card-features li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 11px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-3);
+}
+
+/* Dividers */
+.divider {
+  border: none;
+  height: 1px;
+  background: var(--border);
+  margin: 3.5rem 0;
+}
+
+/* Metrics */
+.metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 1.5rem; }
+.metric-card {
+  background: var(--surface-2);
+  border-radius: var(--radius-sm);
+  padding: 1.2rem;
+}
+.metric-label { font-size: 0.75rem; color: var(--text-3); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.05em; }
+.metric-value { font-size: 1.5rem; font-weight: 700; }
+
+/* Calculator controls */
+.controls { margin-bottom: 1.5rem; }
+.slider-group {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+.slider-group label {
+  font-size: 0.85rem;
+  color: var(--text-2);
+  min-width: 140px;
+}
+.slider-group input[type="range"] {
+  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--surface-2);
+  outline: none;
+}
+.slider-group input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: var(--accent);
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(77,142,247,0.3);
+}
+.slider-group .readout {
+  font-size: 0.95rem;
+  font-weight: 700;
+  min-width: 44px;
+  text-align: right;
+  color: var(--text);
+}
+.toggle-row {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin: 16px 0;
+}
+.toggle-row label {
+  font-size: 0.82rem;
+  color: var(--text-2);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+.toggle-row input[type="checkbox"],
+.toggle-row input[type="radio"] {
+  accent-color: var(--accent);
+  width: 16px;
+  height: 16px;
+}
+
+/* Table */
+.cost-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.85rem;
+}
+.cost-table th {
+  text-align: left;
+  font-weight: 500;
+  color: var(--text-3);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 10px 8px;
+  border-bottom: 1px solid var(--border-hover);
+}
+.cost-table th:last-child { text-align: right; }
+.cost-table td {
+  padding: 10px 8px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-2);
+}
+.cost-table td:last-child { text-align: right; font-weight: 500; color: var(--text); font-variant-numeric: tabular-nums; }
+.cost-table tr.total-row td {
+  border-top: 2px solid var(--border-hover);
+  font-weight: 700;
+  color: var(--text);
+  font-size: 0.95rem;
+  padding-top: 14px;
+}
+
+/* Chart */
+.chart-container { position: relative; width: 100%; height: 320px; margin: 1.5rem 0; }
+
+/* Tips grid */
+.tip-card { position: relative; overflow: hidden; }
+.tip-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px;
+  height: 100%;
+  border-radius: 3px 0 0 3px;
+}
+.tip-card.tip-green::before { background: var(--green); }
+.tip-card.tip-amber::before { background: var(--amber); }
+.tip-card .tip-title { font-size: 0.88rem; font-weight: 500; margin-bottom: 6px; }
+.tip-card .tip-text { font-size: 0.8rem; color: var(--text-2); line-height: 1.6; }
+
+/* Fade-in animation */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.section { animation: fadeUp 0.6s ease-out both; }
+.section:nth-child(2) { animation-delay: 0.1s; }
+.section:nth-child(3) { animation-delay: 0.15s; }
+.section:nth-child(4) { animation-delay: 0.2s; }
+.section:nth-child(5) { animation-delay: 0.25s; }
+
+/* Print */
+@media print {
+  body { background: #fff; color: #111; }
+  .card { border-color: #ddd; background: #fafafa; }
+  .hero h1 em { color: #2563eb; }
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .page { padding: 2rem 1rem; }
+  .g2, .g3, .g4 { grid-template-columns: 1fr; }
+  .slider-group { flex-wrap: wrap; }
+  .slider-group label { min-width: 100%; }
+  .metrics { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <h1>GitHub &amp; Copilot<br><em>Enterprise Cost Analysis</em></h1>
+    <p>A comprehensive pricing breakdown of GitHub platform plans, Copilot tiers, and enterprise add-ons — with an interactive calculator to model your team's total spend.</p>
+  </div>
+
+  <!-- PLATFORM PLANS -->
+  <div class="section">
+    <span class="section-tag">Platform</span>
+    <h2>GitHub plans</h2>
+    <p class="sub">Base platform pricing. Copilot is always a separate add-on.</p>
+    <div class="grid g3">
+      <div class="card">
+        <span class="badge badge-green">Free</span>
+        <div class="card-name">Free</div>
+        <div class="card-price">$0</div>
+        <div class="card-unit">forever</div>
+        <ul class="card-features">
+          <li>Unlimited public &amp; private repos</li>
+          <li>2,000 Actions minutes/month</li>
+          <li>500 MB Packages storage</li>
+          <li>Community support</li>
+          <li>Dependabot alerts</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="badge badge-blue">Teams</span>
+        <div class="card-name">Team</div>
+        <div class="card-price">$4</div>
+        <div class="card-unit">/user/month</div>
+        <ul class="card-features">
+          <li>Protected branches &amp; code owners</li>
+          <li>Required reviewers, draft PRs</li>
+          <li>3,000 Actions minutes/month</li>
+          <li>2 GB Packages storage</li>
+          <li>Web-based support</li>
+        </ul>
+      </div>
+      <div class="card featured">
+        <span class="badge badge-purple">Enterprise</span>
+        <div class="card-name">Enterprise Cloud</div>
+        <div class="card-price">$21</div>
+        <div class="card-unit">/user/month</div>
+        <ul class="card-features">
+          <li>SAML SSO + SCIM provisioning</li>
+          <li>Enterprise Managed Users</li>
+          <li>50,000 Actions minutes/month</li>
+          <li>50 GB Packages storage</li>
+          <li>Audit log streaming + API</li>
+          <li>IP allow lists</li>
+          <li>Data residency (EU, AU, US, JP)</li>
+          <li>Internal repositories</li>
+          <li>Premium support 24/7</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- COPILOT PLANS -->
+  <div class="section">
+    <span class="section-tag">AI Assistance</span>
+    <h2>GitHub Copilot plans</h2>
+    <p class="sub">Billed separately from GitHub platform. Premium requests power Chat, Agent mode, code review, and model selection.</p>
+    <div class="grid g4" style="grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));">
+      <div class="card">
+        <span class="badge badge-green">Free</span>
+        <div class="card-name">Free</div>
+        <div class="card-price">$0</div>
+        <div class="card-unit">limited</div>
+        <ul class="card-features">
+          <li>2,000 completions/month</li>
+          <li>50 premium requests/month</li>
+          <li>Select models only</li>
+        </ul>
+      </div>
+      <div class="card featured">
+        <span class="badge badge-blue">Popular</span>
+        <div class="card-name">Pro</div>
+        <div class="card-price">$10</div>
+        <div class="card-unit">/month ($100/year)</div>
+        <ul class="card-features">
+          <li>Unlimited completions</li>
+          <li>300 premium requests/month</li>
+          <li>Premium models in Chat</li>
+          <li>Cloud agent access</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="badge badge-amber">Power</span>
+        <div class="card-name">Pro+</div>
+        <div class="card-price">$39</div>
+        <div class="card-unit">/month</div>
+        <ul class="card-features">
+          <li>Unlimited completions</li>
+          <li>1,500 premium requests/month</li>
+          <li>All models (Opus, o3, etc.)</li>
+          <li>Extended capabilities</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="badge badge-blue">Teams</span>
+        <div class="card-name">Business</div>
+        <div class="card-price">$19</div>
+        <div class="card-unit">/user/month</div>
+        <ul class="card-features">
+          <li>Unlimited completions</li>
+          <li>300 premium req/user/month</li>
+          <li>Org management &amp; policies</li>
+          <li>IP indemnity, audit logs</li>
+          <li>No training on your code</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="badge badge-purple">Enterprise</span>
+        <div class="card-name">Enterprise</div>
+        <div class="card-price">$39</div>
+        <div class="card-unit">/user/month</div>
+        <ul class="card-features">
+          <li>1,000 premium req/user/month</li>
+          <li>Custom models on your code</li>
+          <li>Knowledge bases</li>
+          <li>GitHub.com Chat integration</li>
+          <li>Requires Enterprise Cloud</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ENTERPRISE ADD-ONS -->
+  <div class="section">
+    <span class="section-tag">Security</span>
+    <h2>Enterprise security add-ons</h2>
+    <p class="sub">Billed per active committer (anyone who committed to GHAS-enabled private repos in the last 90 days).</p>
+    <div class="grid g3">
+      <div class="card">
+        <span class="badge badge-red">Security</span>
+        <div class="card-name">Code Security</div>
+        <div class="card-price">$30</div>
+        <div class="card-unit">/active committer/month</div>
+        <ul class="card-features">
+          <li>CodeQL static analysis</li>
+          <li>Copilot Autofix suggestions</li>
+          <li>Security campaigns</li>
+          <li>Dependency Review Action</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="badge badge-coral">Security</span>
+        <div class="card-name">Secret Protection</div>
+        <div class="card-price">$19</div>
+        <div class="card-unit">/active committer/month</div>
+        <ul class="card-features">
+          <li>Push protection</li>
+          <li>Secret scanning</li>
+          <li>AI-powered detection</li>
+          <li>Security insights dashboard</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="badge badge-amber">Usage</span>
+        <div class="card-name">Overage costs</div>
+        <div class="card-price">Varies</div>
+        <div class="card-unit">beyond plan allowances</div>
+        <ul class="card-features">
+          <li>Actions: $0.008/min Linux</li>
+          <li>Actions: $0.08/min macOS</li>
+          <li>Actions: $0.016/min Windows</li>
+          <li>Packages: $0.07/GiB storage</li>
+          <li>Copilot: $0.04/premium request</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- CALCULATOR -->
+  <div class="section">
+    <span class="section-tag">Calculator</span>
+    <h2>Total enterprise cost calculator</h2>
+    <p class="sub">Model your full GitHub + Copilot + Security stack. Adjust team size and toggle add-ons.</p>
+
+    <div class="controls">
+      <div class="slider-group">
+        <label>Developers</label>
+        <input type="range" min="10" max="500" value="100" step="5" id="devs">
+        <span class="readout" id="devsOut">100</span>
+      </div>
+      <div class="slider-group">
+        <label>Active committers</label>
+        <input type="range" min="5" max="500" value="50" step="5" id="committers">
+        <span class="readout" id="commOut">50</span>
+      </div>
+
+      <div class="toggle-row">
+        <label><input type="checkbox" id="chkSec" checked> Advanced Security</label>
+        <label><input type="checkbox" id="chkCop" checked> Copilot</label>
+        <label><input type="radio" name="copTier" value="biz" id="copBiz" checked> Copilot Business ($19)</label>
+        <label><input type="radio" name="copTier" value="ent" id="copEnt"> Copilot Enterprise ($39)</label>
+      </div>
+    </div>
+
+    <div class="metrics">
+      <div class="metric-card">
+        <div class="metric-label">Monthly</div>
+        <div class="metric-value" id="totalMo">$0</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Annual</div>
+        <div class="metric-value" id="totalYr">$0</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Per developer/mo</div>
+        <div class="metric-value" id="perDev">$0</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">With 25% discount</div>
+        <div class="metric-value" id="discounted" style="color: var(--green);">$0</div>
+      </div>
+    </div>
+
+    <table class="cost-table">
+      <thead><tr><th>Line item</th><th>Monthly cost</th></tr></thead>
+      <tbody id="tbBody"></tbody>
+    </table>
+
+    <div class="chart-container">
+      <canvas id="stackChart"></canvas>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- SCALING CHART -->
+  <div class="section">
+    <span class="section-tag">Scaling</span>
+    <h2>Cost at scale</h2>
+    <p class="sub">Monthly spend as team size grows, comparing the two most common enterprise combos.</p>
+    <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 8px; font-size: 0.78rem;">
+      <span style="display: flex; align-items: center; gap: 6px;"><span style="width:12px;height:12px;border-radius:3px;background:#4d8ef7;"></span>Enterprise Cloud + Copilot Business ($40/user)</span>
+      <span style="display: flex; align-items: center; gap: 6px;"><span style="width:12px;height:12px;border-radius:3px;background:#a78bfa;"></span>Enterprise Cloud + Copilot Enterprise ($60/user)</span>
+      <span style="display: flex; align-items: center; gap: 6px;"><span style="width:12px;height:12px;border-radius:3px;background:#ef4444;"></span>Full stack incl. Security (~$109/user)</span>
+    </div>
+    <div class="chart-container">
+      <canvas id="scaleChart"></canvas>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- TIPS -->
+  <div class="section">
+    <span class="section-tag">Strategy</span>
+    <h2>Negotiation &amp; savings tips</h2>
+    <div class="grid g2">
+      <div class="card tip-card tip-green">
+        <div class="tip-title" style="color: var(--green);">Volume discounts (20–35% off)</div>
+        <div class="tip-text">Organizations with 100+ seats can negotiate significant discounts. Multi-year commitments (2–3 years) unlock the deepest cuts. Always ask — list price is rarely final.</div>
+      </div>
+      <div class="card tip-card tip-green">
+        <div class="tip-title" style="color: var(--green);">Microsoft EA bundling</div>
+        <div class="tip-text">GitHub is part of Microsoft's Enterprise Agreement portfolio. Bundle with Azure, M365, or Dynamics for cross-product leverage and unified billing.</div>
+      </div>
+      <div class="card tip-card tip-amber">
+        <div class="tip-title" style="color: var(--amber);">Active committer billing trap</div>
+        <div class="tip-text">Advanced Security bills per unique committer in the last 90 days — not per seat. This number fluctuates monthly. Limit GHAS-enabled repos to control costs.</div>
+      </div>
+      <div class="card tip-card tip-amber">
+        <div class="tip-title" style="color: var(--amber);">Premium request overages</div>
+        <div class="tip-text">$0.04/request adds up fast for heavy Chat/Agent users. Set spending limits to $0 to prevent surprise bills, or budget for a buffer (e.g., 20% over allowance).</div>
+      </div>
+      <div class="card tip-card tip-green">
+        <div class="tip-title" style="color: var(--green);">Start with a 60-day trial</div>
+        <div class="tip-text">GitHub Enterprise Cloud offers a 60-day free trial with up to 50 licenses. Use it to benchmark adoption, measure Copilot usage, and build your business case before committing.</div>
+      </div>
+      <div class="card tip-card tip-amber">
+        <div class="tip-title" style="color: var(--amber);">Audit unused seats</div>
+        <div class="tip-text">You pay for assigned seats, not active users. Review Copilot usage dashboards monthly — if a developer isn't using AI assistance, the per-seat fee is wasted spend.</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div style="text-align: center; color: var(--text-3); font-size: 0.78rem; padding: 1rem 0;">
+    Pricing data sourced from GitHub's published documentation as of April 2026.<br>
+    Actual costs may vary based on negotiated agreements, promotions, and usage patterns.
+  </div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const fmt = n => '$' + Math.round(n).toLocaleString();
+
+/* ─── Calculator ─── */
+const devSlider = $('devs'), commSlider = $('committers');
+const chkSec = $('chkSec'), chkCop = $('chkCop');
+const copBiz = $('copBiz'), copEnt = $('copEnt');
+
+const stackChart = new Chart($('stackChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Monthly cost breakdown'],
+    datasets: [
+      { label: 'Enterprise Cloud', data: [0], backgroundColor: '#4d8ef7', borderRadius: 6 },
+      { label: 'Code Security', data: [0], backgroundColor: '#ef4444', borderRadius: 6 },
+      { label: 'Secret Protection', data: [0], backgroundColor: '#fb7185', borderRadius: 6 },
+      { label: 'Copilot', data: [0], backgroundColor: '#a78bfa', borderRadius: 6 }
+    ]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': $' + Math.round(ctx.parsed.x).toLocaleString() } }
+    },
+    scales: {
+      x: { stacked: true, grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { color: '#5c6370', callback: v => '$' + v.toLocaleString() } },
+      y: { stacked: true, grid: { display: false }, ticks: { color: '#8b92a0' } }
+    }
+  }
+});
+
+function update() {
+  const devs = parseInt(devSlider.value);
+  const comm = parseInt(commSlider.value);
+  const sec = chkSec.checked;
+  const cop = chkCop.checked;
+  const copRate = copEnt.checked ? 39 : 19;
+  const copLabel = copEnt.checked ? 'Copilot Enterprise' : 'Copilot Business';
+
+  $('devsOut').textContent = devs;
+  $('commOut').textContent = comm;
+
+  const ghBase = devs * 21;
+  const codeSec = sec ? comm * 30 : 0;
+  const secretProt = sec ? comm * 19 : 0;
+  const copCost = cop ? devs * copRate : 0;
+  const total = ghBase + codeSec + secretProt + copCost;
+
+  $('totalMo').textContent = fmt(total) + '/mo';
+  $('totalYr').textContent = fmt(total * 12) + '/yr';
+  $('perDev').textContent = fmt(total / devs);
+  $('discounted').textContent = fmt(total * 0.75 * 12) + '/yr';
+
+  let rows = '';
+  rows += `<tr><td>Enterprise Cloud (${devs} × $21)</td><td>${fmt(ghBase)}</td></tr>`;
+  if (sec) {
+    rows += `<tr><td>Code Security (${comm} committers × $30)</td><td>${fmt(codeSec)}</td></tr>`;
+    rows += `<tr><td>Secret Protection (${comm} committers × $19)</td><td>${fmt(secretProt)}</td></tr>`;
+  }
+  if (cop) rows += `<tr><td>${copLabel} (${devs} × $${copRate})</td><td>${fmt(copCost)}</td></tr>`;
+  rows += `<tr class="total-row"><td>Total monthly</td><td>${fmt(total)}</td></tr>`;
+  rows += `<tr><td style="color:var(--green)">With 25% negotiated discount (annual)</td><td style="color:var(--green)">${fmt(total * 0.75 * 12)}/yr</td></tr>`;
+  $('tbBody').innerHTML = rows;
+
+  stackChart.data.datasets[0].data = [ghBase];
+  stackChart.data.datasets[1].data = [codeSec];
+  stackChart.data.datasets[2].data = [secretProt];
+  stackChart.data.datasets[3].data = [copCost];
+  stackChart.data.datasets[3].label = copLabel;
+  stackChart.update();
+}
+
+[devSlider, commSlider, chkSec, chkCop, copBiz, copEnt].forEach(el => el.addEventListener('input', update));
+update();
+
+/* ─── Scale Chart ─── */
+const sizes = [10, 25, 50, 100, 150, 200, 300, 500];
+new Chart($('scaleChart'), {
+  type: 'line',
+  data: {
+    labels: sizes,
+    datasets: [
+      {
+        label: 'Ent Cloud + Copilot Business',
+        data: sizes.map(n => n * 40),
+        borderColor: '#4d8ef7',
+        backgroundColor: 'rgba(77,142,247,0.06)',
+        fill: true, tension: 0.35, pointRadius: 3, borderWidth: 2
+      },
+      {
+        label: 'Ent Cloud + Copilot Enterprise',
+        data: sizes.map(n => n * 60),
+        borderColor: '#a78bfa',
+        backgroundColor: 'rgba(167,139,250,0.06)',
+        fill: true, tension: 0.35, pointRadius: 3, borderWidth: 2
+      },
+      {
+        label: 'Full stack + Security',
+        data: sizes.map(n => n * 21 + n * 39 + n * 30 + n * 19),
+        borderColor: '#ef4444',
+        backgroundColor: 'rgba(239,68,68,0.06)',
+        fill: true, tension: 0.35, pointRadius: 3, borderWidth: 2
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': $' + Math.round(ctx.parsed.y).toLocaleString() + '/mo' } }
+    },
+    scales: {
+      x: { title: { display: true, text: 'Team size', color: '#5c6370', font: { size: 12 } }, grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { color: '#5c6370' } },
+      y: { title: { display: true, text: 'Monthly cost', color: '#5c6370', font: { size: 12 } }, grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { color: '#5c6370', callback: v => '$' + (v/1000).toFixed(0) + 'k' } }
+    }
+  }
+});
+</script>
+
+</body>
+</html>
